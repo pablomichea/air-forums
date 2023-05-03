@@ -5,7 +5,7 @@
   "description": "",
   "main": "./build/app.js",
   "scripts": {
-    "start:sass-prod": "sass --watch --no-source-map --style=compressed web-views/sass:client/public/css",
+    "start:sass-prod": "sass --watch --no-source-map --style=compressed web-views/sass:../client/public/css",
     "start:build": "tsc -w",
     "start:run": "nodemon build/app.js",
     "start": "concurrently npm:start:*"
