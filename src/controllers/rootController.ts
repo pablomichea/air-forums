@@ -200,29 +200,33 @@ class Foro {
     });
   }
   @post('/new-comment')
-  // @reqBodyCheck('commentContent', 'commentLink', 'locale')
+  @reqBodyCheck('commentContent', 'commentLink', 'locale')
   @use(bodyParser.json())
   async postNewComment(req: Request<string>, res: Response) {
-    console.log('funciona'); //utilizar el id url#id tomar el id del elemento html
-    res.json({ funciona: 'ok' });
-    // const { commentContent, commentLink, locale } = req.body;
-    // const postRoute = commentLink.split('/'); //////////weak
-    // //busca el comment
-    // const link = boards
-    //   .filter((board: board) => board.link === postRoute[0])[0] //////////weak
-    //   .categories.filter(
-    //     (category: category) => category.link === postRoute[1] //////////weak
-    //   )[0]
-    //   .threads.filter((thread: thread) => thread.link === postRoute.at(-1))[0]; //////////weak
-    // const commentCreationDate = new Date(Date.now()).toISOString();
-    // link.comments.push({
-    //   id: link.comments.length - 1 + 1,
-    //   username: req.loggedUser?.username || 'Invitado',
-    //   commentContent,
-    //   commentLink,
-    //   date: { creation: `${commentCreationDate}`, localeUsed: locale },
-    // });
-    // res.status(201).redirect(301, commentLink);
+    //utilizar el id url#id tomar el id del elemento html
+    try {
+      const { commentContent, commentLink, locale } = req.body;
+      const postRoute = commentLink.split('/'); //////////weak
+      //busca el comment
+      const link = boards
+        .filter((board: board) => board.link === postRoute[0])[0] //////////weak
+        .categories.filter(
+          (category: category) => category.link === postRoute[1] //////////weak
+        )[0]
+        .threads.filter((thread: thread) => thread.link === postRoute.at(-1))[0]; //////////weak
+      const commentCreationDate = new Date(Date.now()).toISOString();
+      link.comments.push({
+        id: link.comments.length - 1 + 1,
+        username: req.loggedUser?.username || 'Invitado',
+        commentContent,
+        commentLink,
+        date: { creation: `${commentCreationDate}`, localeUsed: locale },
+      });
+      res.status(201).redirect(301, commentLink);
+    } catch (err) {
+      console.log('Error al comentar', err);
+      res.redirect('/');
+    }
   }
   @post('/check-new-posts')
   @use(bodyParser.json())

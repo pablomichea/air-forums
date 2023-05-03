@@ -42,6 +42,7 @@ import { rootDir } from './util/path.js';
 import './controllers/rootController.js';
 import mongoose from 'mongoose';
 import { User } from './models/user.js';
+import cors from 'cors';
 import { config } from 'dotenv';
 config({ path: '.env' });
 function formatCookie(cookie) {
@@ -55,6 +56,7 @@ function formatCookie(cookie) {
     return {};
 }
 var app = express();
+app.use(cors({ origin: 'https://war-z.onrender.com', methods: ['GET', 'POST', 'OPTIONS'] }));
 app.use(function (req, res, next) {
     return __awaiter(this, void 0, void 0, function () {
         var user;

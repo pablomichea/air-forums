@@ -208,21 +208,33 @@ var Foro = (function () {
     };
     Foro.prototype.postNewComment = function (req, res) {
         var _a;
-        var _b = req.body, commentContent = _b.commentContent, commentLink = _b.commentLink, locale = _b.locale;
-        var postRoute = commentLink.split('/');
-        var link = boards
-            .filter(function (board) { return board.link === postRoute[0]; })[0]
-            .categories.filter(function (category) { return category.link === postRoute[1]; })[0]
-            .threads.filter(function (thread) { return thread.link === postRoute.at(-1); })[0];
-        var commentCreationDate = new Date(Date.now()).toISOString();
-        link.comments.push({
-            id: link.comments.length - 1 + 1,
-            username: ((_a = req.loggedUser) === null || _a === void 0 ? void 0 : _a.username) || 'Invitado',
-            commentContent: commentContent,
-            commentLink: commentLink,
-            date: { creation: "".concat(commentCreationDate), localeUsed: locale },
+        return __awaiter(this, void 0, void 0, function () {
+            var _b, commentContent, commentLink, locale, postRoute_1, link, commentCreationDate;
+            return __generator(this, function (_c) {
+                try {
+                    _b = req.body, commentContent = _b.commentContent, commentLink = _b.commentLink, locale = _b.locale;
+                    postRoute_1 = commentLink.split('/');
+                    link = boards
+                        .filter(function (board) { return board.link === postRoute_1[0]; })[0]
+                        .categories.filter(function (category) { return category.link === postRoute_1[1]; })[0]
+                        .threads.filter(function (thread) { return thread.link === postRoute_1.at(-1); })[0];
+                    commentCreationDate = new Date(Date.now()).toISOString();
+                    link.comments.push({
+                        id: link.comments.length - 1 + 1,
+                        username: ((_a = req.loggedUser) === null || _a === void 0 ? void 0 : _a.username) || 'Invitado',
+                        commentContent: commentContent,
+                        commentLink: commentLink,
+                        date: { creation: "".concat(commentCreationDate), localeUsed: locale },
+                    });
+                    res.status(201).redirect(301, commentLink);
+                }
+                catch (err) {
+                    console.log('Error al comentar', err);
+                    res.redirect('/');
+                }
+                return [2];
+            });
         });
-        res.status(201).redirect(301, commentLink);
     };
     Foro.prototype.checkNewPosts = function (req, res) {
         var _a = req.body, count = _a.count, fromThread = _a.fromThread, fromRoute = _a.fromRoute;
@@ -261,11 +273,11 @@ var Foro = (function () {
     ], Foro.prototype, "postNewThread", null);
     __decorate([
         post('/new-comment'),
-        use(bodyParser.json()),
         reqBodyCheck('commentContent', 'commentLink', 'locale'),
+        use(bodyParser.json()),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object, Object]),
-        __metadata("design:returntype", void 0)
+        __metadata("design:returntype", Promise)
     ], Foro.prototype, "postNewComment", null);
     __decorate([
         post('/check-new-posts'),
@@ -416,7 +428,6 @@ var RegisterUser = (function () {
     ], RegisterUser.prototype, "getSignUp", null);
     __decorate([
         post('/'),
-        use(CORS),
         reqBodyCheck('username', 'email', 'password'),
         use(bodyParser.json()),
         __metadata("design:type", Function),

@@ -25,6 +25,7 @@ function formatCookie(cookie?: string) {
 const app = express();
 
 app.use(cors({ origin: 'https://war-z.onrender.com', methods: ['GET', 'POST', 'OPTIONS'] }));
+
 app.use(async function (req: Request, res, next) {
   const user: string = formatCookie(req.headers.cookie).username;
   await User.findOne({ username: user })
