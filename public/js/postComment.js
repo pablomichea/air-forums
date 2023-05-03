@@ -28,7 +28,7 @@ async function fetchNewPosts() {
 try {
   const [txtArea, txtInput] = [...document.querySelector('.form-thread-reply')];
   const btnPostComment = document.querySelector('.form-btn-post-comment');
-
+  console.log('queryselector pass');
   btnPostComment.addEventListener('click', e => {
     e.preventDefault();
     const commentHTML = `<div class="thread-comment-container">
@@ -38,7 +38,7 @@ try {
   </div>`;
 
     //post comment
-
+    console.log('fetch comment...');
     (txtArea.value.trimStart() &&
       fetchPOST('https://war-z.onrender.com/board/new-comment', {
         commentContent: txtArea.value.trimStart().trimEnd(),
@@ -46,6 +46,7 @@ try {
         locale: navigator.language,
       })
         .then(data => {
+          console.log('then...');
           txtArea.value = ''.trimStart().trimEnd();
           txtArea.focus();
           data.ok && threadCommentSection.insertAdjacentHTML('beforeend', commentHTML);
@@ -55,6 +56,7 @@ try {
         })
         .then(res => res.json())
         .then(newPostsResponse => {
+          console.log('check new posts responses...');
           newPostsResponse.newPosts && document.location.reload();
         })
         .catch(err => console.error('Error:', err))) ||

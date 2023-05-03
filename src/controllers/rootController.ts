@@ -202,7 +202,7 @@ class Foro {
   @post('/new-comment')
   @use(bodyParser.json())
   @reqBodyCheck('commentContent', 'commentLink', 'locale')
-  postNewComment(req: Request<string>, res: Response): void {
+  async postNewComment(req: Request<string>, res: Response) {
     //utilizar el id url#id tomar el id del elemento html
     const { commentContent, commentLink, locale } = req.body;
     const postRoute = commentLink.split('/'); //////////weak
