@@ -19,7 +19,7 @@ async function fetchPOST(url, data) {
 
 async function fetchNewPosts() {
   const threadCommentSectionPosts = document.querySelectorAll('.thread-comment-section > *');
-  return fetchPOST('http://localhost:3333/board/check-new-posts', {
+  return fetchPOST('https://war-z.onrender.com/board/check-new-posts', {
     count: threadCommentSectionPosts.length,
     fromThread: document.location.pathname.split('/').at(-1),
     fromRoute: document.location.pathname,
@@ -40,7 +40,7 @@ try {
     //post comment
 
     (txtArea.value.trimStart() &&
-      fetchPOST('http://localhost:3333/board/new-comment', {
+      fetchPOST('https://war-z.onrender.com/board/new-comment', {
         commentContent: txtArea.value.trimStart().trimEnd(),
         commentLink: txtInput.value,
         locale: navigator.language,

@@ -13,7 +13,7 @@ formBtnSignup.addEventListener('click', e => {
 
   const data = JSON.stringify({ username: username.value, email: email.value, password: password.value });
 
-  fetch('http://localhost:3333/signup', {
+  fetch('https://war-z.onrender.com/signup', {
     method: 'POST',
     headers: headers,
     credentials: 'include',
