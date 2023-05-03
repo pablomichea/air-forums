@@ -200,11 +200,11 @@ class Foro {
     });
   }
   @post('/new-comment')
-  @use(bodyParser.json())
   // @reqBodyCheck('commentContent', 'commentLink', 'locale')
+  @use(bodyParser.json())
   async postNewComment(req: Request<string>, res: Response) {
-    res.json({ funciona: 'ok' });
     console.log('funciona'); //utilizar el id url#id tomar el id del elemento html
+    res.json({ funciona: 'ok' });
     // const { commentContent, commentLink, locale } = req.body;
     // const postRoute = commentLink.split('/'); //////////weak
     // //busca el comment
