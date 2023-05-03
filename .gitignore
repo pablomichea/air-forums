@@ -2,4 +2,3 @@
 *.txt
 *.jpg
 /server/node_modules/
-/server/build/
