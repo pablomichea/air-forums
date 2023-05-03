@@ -12,7 +12,9 @@ function initUsernameModal() {
     const rightBorder = posX + usernameModal.clientWidth;
 
     usernameModal.style.top = `${posY}px`;
-    usernameModal.style.left = `${rightBorder < window.innerWidth ? posX : window.innerWidth - usernameModal.clientWidth}px`;
+    usernameModal.style.left = `${
+      rightBorder < window.innerWidth ? posX : window.innerWidth - usernameModal.clientWidth
+    }px`;
   }
 
   allPopups.forEach(comment => {
@@ -93,15 +95,6 @@ allComments &&
     commentObserver.observe(comment);
     // commentTrackObserver.observe(comment);
   });
-
-//
-//offsetY
-//event.pageY
-//screenY
-// document.scrollingElement??
-//window.screen.availHeight
-
-//onfullscreenchange
 
 // [id^='someId'] ID empieza con.
 
