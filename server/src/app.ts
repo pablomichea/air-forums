@@ -50,8 +50,8 @@ const start = async () => {
     console.log('Conectando...');
     await mongoose.connect(process.env.MONGO_URI);
     console.log('You successfully connected to MongoDB!');
-    app.listen(process.env.PORT || 3000, () => {
-      console.log(`Listening on port ${process.env.PORT || 3000}.`);
+    app.listen(process.env.PORT || 3333, () => {
+      console.log(`Listening on port ${process.env.PORT || 3333}.`);
     });
   } catch (err) {
     console.log(err);
