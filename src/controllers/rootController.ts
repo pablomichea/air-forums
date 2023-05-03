@@ -313,7 +313,6 @@ class RegisterUser {
   }
   //POST
   @post('/')
-  @use(CORS)
   @reqBodyCheck('username', 'email', 'password')
   @use(bodyParser.json())
   async postSignUp(req: Request<string>, res: Response) {

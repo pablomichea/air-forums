@@ -7,6 +7,7 @@ import './controllers/rootController.js';
 import mongoose from 'mongoose';
 import { Request } from './controllers/rootController.js';
 import { User } from './models/user.js';
+import cors from 'cors';
 import { config } from 'dotenv';
 config({ path: '.env' });
 
@@ -23,6 +24,7 @@ function formatCookie(cookie?: string) {
 
 const app = express();
 
+app.use(cors());
 app.use(async function (req: Request, res, next) {
   const user: string = formatCookie(req.headers.cookie).username;
   await User.findOne({ username: user })
