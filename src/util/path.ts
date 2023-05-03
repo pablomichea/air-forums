@@ -4,4 +4,4 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-export const rootDir = path.join(__dirname, '../../../client/public');
+export const rootDir = path.join(__dirname, '../../');

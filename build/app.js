@@ -43,7 +43,7 @@ import './controllers/rootController.js';
 import mongoose from 'mongoose';
 import { User } from './models/user.js';
 import { config } from 'dotenv';
-config({ path: path.resolve(process.cwd(), '../.env') });
+config({ path: '.env' });
 function formatCookie(cookie) {
     if (cookie) {
         return cookie.split(';').reduce(function (acc, curr) {
@@ -78,7 +78,7 @@ app.use(function (req, res, next) {
         });
     });
 });
-app.use(express.static(path.join(rootDir)));
+app.use(express.static(path.join(rootDir, 'public')));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'pug');
 app.set('views', 'web-views');

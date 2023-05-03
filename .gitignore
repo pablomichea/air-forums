@@ -1,4 +1,4 @@
 .env
 *.txt
 *.jpg
-/server/node_modules/
+/node_modules/
