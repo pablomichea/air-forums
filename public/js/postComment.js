@@ -7,7 +7,7 @@ headers.append('Content-Type', 'application/json');
 headers.append('Accept', 'application/json');
 
 async function fetchPOST(url, data) {
-  return fetch(url, {
+  return await fetch(url, {
     method: 'POST',
     headers: headers,
     credentials: 'include',
