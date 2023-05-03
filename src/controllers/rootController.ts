@@ -200,6 +200,7 @@ class Foro {
     });
   }
   @post('/new-comment')
+  @use(CORS)
   @use(bodyParser.json())
   @reqBodyCheck('commentContent', 'commentLink', 'locale')
   async postNewComment(req: Request<string>, res: Response) {
