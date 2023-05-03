@@ -6,7 +6,7 @@ const headers = new Headers();
 headers.append('Content-Type', 'application/json');
 headers.append('Accept', 'application/json');
 
-function fetchPOST(url, data) {
+async function fetchPOST(url, data) {
   return fetch(url, {
     method: 'POST',
     headers: headers,
@@ -15,7 +15,7 @@ function fetchPOST(url, data) {
   });
 }
 
-function fetchNewPosts() {
+async function fetchNewPosts() {
   const threadCommentSectionPosts = document.querySelectorAll('.thread-comment-section > *');
   return fetchPOST('https://war-z.onrender.com/board/check-new-posts', {
     count: threadCommentSectionPosts.length,
