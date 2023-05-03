@@ -2,13 +2,11 @@
 
 const threadCommentSection = document.querySelector('.thread-comment-section');
 const postCount = document.querySelector('.thread-info-comments-qty');
-
 const headers = new Headers();
-
 headers.append('Content-Type', 'application/json');
 headers.append('Accept', 'application/json');
 
-async function fetchPOST(url, data) {
+function fetchPOST(url, data) {
   return fetch(url, {
     method: 'POST',
     headers: headers,
@@ -17,7 +15,7 @@ async function fetchPOST(url, data) {
   });
 }
 
-async function fetchNewPosts() {
+function fetchNewPosts() {
   const threadCommentSectionPosts = document.querySelectorAll('.thread-comment-section > *');
   return fetchPOST('https://war-z.onrender.com/board/check-new-posts', {
     count: threadCommentSectionPosts.length,
