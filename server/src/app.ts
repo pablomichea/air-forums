@@ -8,7 +8,7 @@ import mongoose from 'mongoose';
 import { Request } from './controllers/rootController.js';
 import { User } from './models/user.js';
 import { config } from 'dotenv';
-config({ path: '../.env' });
+config({ path: path.resolve(process.cwd(), '../.env') });
 
 function formatCookie(cookie?: string) {
   if (cookie) {
@@ -36,7 +36,7 @@ app.use(async function (req: Request, res, next) {
   next();
 });
 
-app.use(express.static(path.join(rootDir, 'public')));
+app.use(express.static(path.join(rootDir)));
 app.use(bodyParser.urlencoded({ extended: true })); //formularios
 
 app.set('view engine', 'pug');
