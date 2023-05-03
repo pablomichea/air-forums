@@ -16,6 +16,7 @@ async function fetchPOST(url, data) {
 }
 
 async function fetchNewPosts() {
+  console.log('fetching new posts...');
   const threadCommentSectionPosts = document.querySelectorAll('.thread-comment-section > *');
   return fetchPOST('https://war-z.onrender.com/board/check-new-posts', {
     count: threadCommentSectionPosts.length,
@@ -38,10 +39,15 @@ try {
     //post comment
     console.log('fetch comment...');
     (txtArea.value.trimStart() &&
-      fetchPOST('https://war-z.onrender.com/board/new-comment', {
-        commentContent: txtArea.value.trimStart().trimEnd(),
-        commentLink: txtInput.value,
-        locale: navigator.language,
+      fetch('https://war-z.onrender.com/board/new-comment', {
+        method: 'POST',
+        headers: headers,
+        credentials: 'include',
+        body: JSON.stringify({
+          commentContent: txtArea.value.trimStart().trimEnd(),
+          commentLink: txtInput.value,
+          locale: navigator.language,
+        }),
       })
         .then(data => {
           console.log('then...');
