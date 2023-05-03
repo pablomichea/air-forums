@@ -221,7 +221,7 @@ class Foro {
       commentLink,
       date: { creation: `${commentCreationDate}`, localeUsed: locale },
     });
-    res.redirect(301, commentLink);
+    res.status(201).redirect(301, commentLink);
   }
   @post('/check-new-posts')
   @use(bodyParser.json())

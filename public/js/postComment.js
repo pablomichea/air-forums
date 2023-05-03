@@ -53,6 +53,7 @@ try {
           console.log('then...');
           txtArea.value = ''.trimStart().trimEnd();
           txtArea.focus();
+          console.log(data.ok);
           data.ok && threadCommentSection.insertAdjacentHTML('beforeend', commentHTML);
           initUsernameModal();
           //check new posts
