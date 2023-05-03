@@ -2,3 +2,4 @@
 *.txt
 *.jpg
 /node_modules/
+.env-sample
