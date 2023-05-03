@@ -1,0 +1,11 @@
+{
+  "name": "air-forums",
+  "version": "1.0.0",
+  "description": "Lightweight and beautiful forum web app.",
+  "main": "/server/build/app.js",
+  "scripts": {
+    "start": "node server/build/app.js"
+  },
+  "author": "Pablo Michea",
+  "license": "ISC"
+}

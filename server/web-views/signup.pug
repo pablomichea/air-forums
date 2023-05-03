@@ -1,0 +1,14 @@
+extends board-layout
+block script
+    script(src="/js/signup.js", defer) 
+block content
+    if !userInfo
+        p Registrate
+        form(class='form')
+            label(for="username") Nombre de usuario
+            input#username(type="text", name="username", minlength=5, required)
+            label(for="email") Email
+            input#email(type="email", name="email", required)
+            label(for="password") Contraseña
+            input#password(type="password", name="password", minlength=8, required, autocomplete )
+            button(class='form-btn-signup')  Registrar

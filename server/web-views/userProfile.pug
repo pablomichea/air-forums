@@ -1,0 +1,13 @@
+extends board-layout
+block css
+    link(rel="stylesheet", href="/css/userProfile.css")
+block content
+    div(class='profile-container')
+        if username
+            h1.title Perfil de usuario
+            h1.username Usuario: #{username}
+            p.role Rol: #{role}
+            p.post-count Posts: #{postCount}
+            p.rep-points Reputacion: #{rep}
+        else
+            h1 Usuario no encontrado

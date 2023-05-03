@@ -1,0 +1,31 @@
+extends board-layout
+block board
+        h2(class) #{title}
+        div(class='forum-container')
+            // renderiza los foros
+            each board in boards 
+                if board.categories.length
+                    // crea un foro
+                    div(class='forum-section')
+                        // titulo del foro con link
+                        a(href=`board/${board.link}`, class="link-to-forum")= board.title
+                        p(class='forum-header-forum') Foro
+                        p(class='forum-header-info') Info
+                        P(class='forum-header-last-msg') Ultimo mensaje
+                        div(class='forum-all-categories')
+                            // categorias
+                            each category in board.categories
+                                if category.title
+                                    div(class='forum-category')
+                                        a(class='category-title', href=`board/${board.link}/${category.link}`)= category.title
+                                        p(class='category-desc')= category.desc
+                else
+                    div(class='forum-section')
+                        a(href=`board/${board.link}`, class="link-to-forum")= board.title
+                        p(class='forum-header-forum') Foro
+                        p(class='forum-header-info') Info
+                        P(class='forum-header-last-msg') Ultimo mensaje
+                        div(class='forum-all-categories')
+                        div(class='forum-all-categories')
+                            div(class='forum-category')
+                                p Sin categorias

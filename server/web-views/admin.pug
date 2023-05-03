@@ -1,0 +1,26 @@
+extends board-layout
+block content
+    p Admin page
+    div(class='admin')
+        fieldset(form='add-forum') 
+            legend Agrega un foro
+            form#add-forum(action="admin/add-board", method="post") 
+                label(for="input-board-name") Nombre del foro:
+                input#input-board-name(type="text", name="boardName", required)
+                label(for="input-board-desc") Descripcion del foro:
+                textarea#input-board-desc(name="boardDesc", cols="30", rows="10")
+                button(type="submit") Agregar
+        
+        fieldset(form='add-category') 
+            legend  Agrega una categoria
+            form#add-category(action="admin/add-category", method="post") 
+                label(for="input-category-name") Nombre de la categoria:
+                input#input-category-name(type="text", name="categoryName", required)
+                label(for="input-category-desc") Descripcion de la categoria:
+                textarea#input-category-desc(name="categoryDesc", cols="30", rows="10", minlength=2, required)
+                label(for="categories-list") Selecciona el foro:
+                select#categories-list(name="forumName", required)
+                    option(value='', selected, disabled) Selecciona un foro 
+                    each category in categories
+                        option(value=`${category}`)= category
+                button(type="submit") Agregar

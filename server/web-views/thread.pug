@@ -1,0 +1,49 @@
+
+extends board-layout
+block css
+    link(rel="stylesheet", href="/css/thread.css")
+block script
+    script(src="/js/thread.js", defer) 
+    script(src="/js/postComment.js", defer) 
+block thread
+    //-
+    - const dateOptions = {dateStyle:'long'};
+    - const now = new Date(Date.now());
+    - const currentMonthLength = new Date(new Date(now).getFullYear(), (new Date(now).getMonth()+1), 0).getDate()// Duracion mes actual
+    - const calc = (date1, date2) => Math.round((((date1.getTime() - new Date(date2).getTime())/1000)));//Devuelve resta en seg
+    - const roundN = (n) => Math.round(n);
+    - const timestampPrint = (n, date, locale) => n < 60 ? `Hace ${roundN(n)} segundos` : n/60 < 60 ? `Hace ${roundN(n/60)} minutos` : (n/60)/60 < 23 ? `Hace ${roundN((n/60)/60)} horas` : roundN(((n/60)/60)/24) === 1 ? 'Hace 1 dia' : ((n/60)/60)/24 < 6 ? `Hace ${roundN(((n/60)/60)/24)} días` : roundN((((n/60)/60)/24)/7) === 1 ? 'Hace 1 semana' : (((n/60)/60)/24)/7 < 4 ? `Hace +${roundN((((n/60)/60)/24)/7)} semanas` : (((n/60)/60)/24) < currentMonthLength ? 'Hace 1 mes' : new Date(date).toLocaleDateString(locale, dateOptions);
+    //-     
+    mixin popup
+        li Ultima coneccion: #{0}
+        li Ultimo comentario en: #{0}
+    //-
+    div(class='thread-container')
+        //-author
+        div(class='thread-author-container')
+            h2(class='thread-author-title') #{title}
+            p(class='thread-author-content') !{threadContent}
+            a(href=`/board/user-profile/${username}`, class='thread-author-username')= username
+                ul(class='thread-author-username-modal')
+                    +popup
+            time(class='thread-author-timestamp', datetime=`${date.creation}`) #{`${timestampPrint(calc(now, date.creation), date.creation, date.localeUsed)}`}
+        if open
+            //-showing comments
+            p(class='thread-info-comments-qty') Mostrando 1-15 de #{comments.length} comentarios 
+        //-comments
+        div.thread-comment-section
+            each comment in comments
+                div(class='thread-comment-container')
+                    p(class='thread-comment-content') !{comment.commentContent}
+                    if !(comment.username === 'Invitado')
+                        a(href=`/board/user-profile/${comment.username}`, class='thread-comment-username')= comment.username
+                    else 
+                        div(class='thread-comment-username')= comment.username
+                    time(class='thread-comment-timestamp', datetime=`${comment.date.creation}`) #{`${timestampPrint(calc(now, comment.date.creation), comment.date.creation, date.localeUsed)}`}
+        if open
+            form(class='form-thread-reply', action="/board/new-comment", method="post") 
+                textarea(name="commentContent", minlength=2, required, placeholder='Responde al tema')
+                input(type="hidden", name="commentLink", value=link)
+                button(class='form-btn-post-comment', type="submit") Responder
+        else
+            div(class='thread-closed-msg') Este hilo no esta abierto para respuestas.

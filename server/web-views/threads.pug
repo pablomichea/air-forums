@@ -1,0 +1,16 @@
+extends board-layout
+block css
+    link(rel="stylesheet", href="/css/category.css")
+block category-threads
+    h2 Categoria: #{title}
+    button(disabled)
+        a(href='/board/new-thread') Crear tema 
+    div(class='threads')
+        if threads.length
+            div Temas:
+            each thread in threads
+                //- a(href=`${link}/${post.link}.${post.id}`) - #{post.title}
+                a(href=`${link}/${thread.link}`) - #{thread.title}
+        else 
+            p no hay hilos
+    

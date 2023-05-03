@@ -1,0 +1,34 @@
+extends board-layout
+block new-thread
+    h2 Crea un nuevo tema
+    fieldset 
+        legend 
+            - var msg = ''
+            if !boards.length
+                - msg = 'No existe ningun foro'
+                p= msg
+            else
+                - msg = 'Primero crea una categoria dentro de un foro'
+                each board in boards
+                    if board.categories.length
+                        - msg = ''                        
+                    else
+                        p= msg                 
+            if !msg
+                // envia: category.name postTitle theadContent
+                form(action="new-thread", method="post") 
+                    if !fromThread
+                        label(for="category-location") Categoria:
+                        select#category-location(name="categoryLocation", required)
+                            option(value='', selected, disabled) Selecciona una categoria 
+                            //lista - todos los foros y categorias
+                            each board in boards
+                                optgroup(label=`${board.title}`)
+                                if board.categories.length > 0
+                                    each category, i in board.categories
+                                        option(value=`${category.title}`)= category.title
+                    label(for="thread-name") 
+                    input#thread-name(type="text", name="postTitle", placeholder="Titulo del tema", pattern='^[a-zA-Z0-9\-\.!? ]*$', required)
+                    label(for="thread-content") 
+                    textarea#thread-content(name="threadContent", cols="80", rows="10", minlength=2, required)
+                    button(type="submit") Enviar

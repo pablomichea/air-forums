@@ -1,0 +1,309 @@
+// @import 'thread.scss';
+// @import 'category.scss';
+
+@font-face {
+  font-family: rubikFont;
+  src: url(../fonts/Rubik/static/Rubik-Light.ttf);
+}
+@font-face {
+  font-family: halo;
+  src: url(../fonts/Halo/Halo.ttf);
+} /*                   Scroll                  */
+::-webkit-scrollbar {
+  width: 0px;
+  display: none;
+  -webkit-appearance: none;
+}
+::-webkit-scrollbar-button :decrement {
+  background: hsla(0, 0%, 73%, 0.233);
+}
+::-webkit-scrollbar-track {
+  width: 10px;
+  background: rgba(53, 53, 53, 0.1);
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(172, 172, 172, 0.836);
+}
+
+*,
+::after,
+::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: var(--textNormal);
+  font-family: rubikFont;
+  font-size: 1rem;
+  scroll-behavior: smooth;
+  //hacen lo mismo (para compatibilidad con navegadores)
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  // word-break: break-all;
+  word-break: break-word;
+  white-space: break-spaces;
+}
+:root {
+  --textNormal: #ffffff;
+  --textOrange: #ffffff;
+  --textDark: black;
+  --dark: rgba(11, 11, 11, 0.59);
+  --btnColor: rgba(255, 0, 0, 0.5);
+  --borderColor: #0000004c;
+  --greyDark: #333333;
+  --greyLight: #6d6d6d;
+  --blue: #455563;
+}
+///////////////////////////////////
+////////       BODY        ////////
+///////////////////////////////////
+body {
+  // background: rgb(30, 40, 53);
+  // background: rgb(82, 90, 100);
+  background-color: rgb(41, 44, 50);
+  // background-color: rgba(39, 40, 44, 0.4);
+
+  header {
+    display: grid;
+    grid-template-columns: max-content max-content max-content;
+    grid-template-rows: max-content;
+    background-color: rgb(15, 9, 9);
+    justify-content: space-evenly;
+    padding-top: 10px;
+    .header-btn-logo {
+      font-size: 1.3rem;
+      grid-column: 1/2;
+      grid-row: 1/2;
+    }
+    .header-btn-index-board {
+      letter-spacing: 2px;
+      margin-top: 6px;
+      padding: 4px 10px;
+      font-weight: bold;
+      border-left: 3px solid rgb(131, 0, 0);
+      border-right: 1px solid rgb(129, 0, 0);
+      // outline: 5px solid rgb(131, 0, 0);
+
+      border-radius: 55px;
+      font-size: 1.3rem;
+      grid-column: 2/3;
+      grid-row: 1/2;
+    }
+    .header-btn-username {
+      font-size: 1.3rem;
+      grid-column: 3/4;
+      grid-row: 1/2;
+    }
+  }
+  .cmd {
+    position: sticky;
+    // width: 100%;
+    top: 0;
+    padding-bottom: 10px;
+    letter-spacing: 8px;
+    text-align: center;
+    font-size: 4.1rem;
+    font-family: halo;
+    background-color: rgb(15, 9, 9);
+    z-index: 2;
+    user-select: none;
+  }
+  // main {
+  // margin: 0 auto;
+  // display: flex;
+  // flex-wrap: nowrap;
+  // justify-content: center;
+  // position: relative;
+  // height: 100%;
+  // }
+  section {
+    // display: grid;
+    // grid-template-columns: 100%;
+    // grid-template-rows: auto;
+    // justify-content: center;
+    // height: 100%;
+    // gap: 10px;
+    opacity: 0;
+    animation: show 250ms ease-out forwards;
+  }
+  @keyframes show {
+    to {
+      opacity: 1;
+    }
+  }
+}
+///////////////////////////////////
+////////     board.pug      ////////
+///////////////////////////////////
+.forum-container {
+  margin: auto;
+  max-width: 680px;
+  padding: 15px;
+  margin-top: 10px;
+  .forum-section {
+    display: grid;
+    grid-template-columns: fit-content fit-content fit-content fit-content fit-content;
+    grid-template-rows: 35px 28px auto 50px;
+    background-color: var(--);
+    border: 1px solid var(--borderColor);
+    gap: 1px;
+    justify-content: center;
+    .forum-header-forum {
+      outline: 1px solid var(--borderColor);
+      text-indent: 10px;
+      grid-column: 2/3;
+      grid-row: 2/3;
+      display: flex;
+      justify-content: start;
+      align-items: center;
+      background-color: var(--greyLight);
+      color: var(--textOrange);
+      font-weight: bold;
+      font-size: 1rem;
+    }
+    .link-to-forum {
+      color: var(--textNormal);
+      grid-column: 1/6;
+      grid-row: 1/2;
+      background-color: var(--greyDark);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.1rem;
+    }
+    .forum-header-info {
+      outline: 1px solid var(--borderColor);
+      grid-column: 3/4;
+      grid-row: 2/3;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: var(--greyLight);
+      color: var(--textOrange);
+      font-weight: bold;
+      font-size: 1rem;
+    }
+    .forum-header-last-msg {
+      outline: 1px solid var(--borderColor);
+      grid-column: 4/5;
+      grid-row: 2/3;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: var(--greyLight);
+      color: var(--textOrange);
+      font-weight: bold;
+      font-size: 1rem;
+    }
+    .forum-all-categories {
+      grid-column: 2/3;
+      grid-row: 3/4;
+      // display: flex;
+      // flex-direction: column;
+      .forum-category {
+        padding: 10px 5px;
+        background-color: var(--greyDark);
+        outline: 1px solid var(--borderColor);
+        .category-title {
+          font-weight: bold;
+        }
+        .category-desc {
+          font-size: 0.9rem;
+        }
+      }
+    }
+  }
+}
+///////////////////////////////////
+////////     admin.pug     ////////
+///////////////////////////////////
+.admin {
+  display: flex;
+  gap: 20px;
+  legend {
+    font-weight: bold;
+  }
+}
+///////////////////////////////////
+////    HTML ELEMENT FORMAT    ////
+///////////////////////////////////
+a {
+  color: var(--textOrange);
+  text-decoration: none;
+}
+fieldset {
+  border: none;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  // width: 300px;
+}
+input,
+select,
+option {
+  color: var(--textDark);
+  border: none;
+  border-radius: 2px;
+  height: 30px;
+}
+textarea {
+  color: black;
+  border: none;
+  border-radius: 0px;
+  padding: 15px 20px;
+  padding-bottom: 0px;
+  resize: none;
+  overflow: hidden;
+  border-radius: 1px;
+}
+optgroup {
+  color: var(--textDark);
+}
+option[disabled] {
+  font-weight: bold;
+}
+label {
+  color: var(--textNormal);
+}
+button {
+  border: none;
+  background-color: var(--btnColor);
+  color: var(--textNormal);
+  width: 100px;
+  height: 35px;
+}
+img {
+  cursor: pointer;
+  transition: 500ms;
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0px 0px 10px 4px rgba(0, 0, 0, 0.2);
+  // padding: 5px;
+  outline: 2px solid rgba(147, 147, 147, 0.3);
+}
+.progress-bar {
+  position: fixed;
+  background-color: rgba(255, 255, 255, 0.4);
+  margin-top: 70px;
+  min-height: 8px;
+  width: 100%;
+  bottom: 0;
+  z-index: 1;
+}
+.center-bar {
+  position: fixed;
+  background-color: rgba(255, 255, 255, 0);
+  min-height: 100%;
+  width: 1%;
+  top: 0;
+  z-index: -1;
+}
+.hide {
+  visibility: hidden;
+  opacity: 0;
+}
